@@ -8,7 +8,6 @@ require('dotenv').config();  // Cargar variables de entorno desde .env
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-
 // Configurar CORS
 const allowedOrigins = ['https://blogeducativo.netlify.app', 'http://localhost:3000', 'http://localhost:5173'];
 const corsOptions = {
@@ -24,6 +23,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Ruta de prueba para verificar CORS
+app.get('/test-cors', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://blogeducativo.netlify.app');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.json({ message: 'CORS is working!' });
+});
 
 // Middleware
 app.use(bodyParser.json());
